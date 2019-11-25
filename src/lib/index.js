@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { name, address, finance } from 'faker';
 import { uniqueId } from 'lodash';
 import PropsTypes from 'prop-types';
 
@@ -6,10 +6,10 @@ const itemsCount = 10000;
 const hotelsList = Array(itemsCount)
   .fill({})
   .map(() => ({
-    id: uniqueId(),
-    name: `${faker.name.lastName()} Hotel`,
-    region: faker.address.country(),
-    price: faker.finance.amount(),
+    id: Number(uniqueId()),
+    name: `${name.lastName()} Hotel`,
+    region: address.country(),
+    price: Number(finance.amount()),
     image: `https://photo.hotellook.com/image_v2/limit/h${uniqueId()}_1/345/170.auto`,
   }));
 

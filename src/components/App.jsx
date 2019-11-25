@@ -58,7 +58,7 @@ const App = ({
       <AppBar>
         <Container fixed>
           <Box display="flex" alignItems="flex-end" py={2}>
-            <Selectbox handleChange={handleChange} items={filters} label="Select region" defaultValue="none" />
+            <Selectbox filter={filter} handleChange={handleChange} items={filters} label="Select region" defaultValue="none" />
             <Typography>{`We found: ${pluralize(loadedRowsCount, 'hotel')}`}</Typography>
           </Box>
         </Container>

@@ -6,6 +6,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles(() => ({
   select: {
+    minWidth: '200px',
     color: 'white',
     '&:before': {
       borderColor: 'white',
@@ -17,7 +18,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Selectbox = ({
-  items, handleChange, label, defaultValue,
+  items, handleChange, label, defaultValue, filter,
 }) => {
   const styledArrowDropDownIcon = styled(ArrowDropDownIcon)({
     color: 'white',
@@ -26,7 +27,7 @@ const Selectbox = ({
   return (
     <Box mr={2}>
       <Select
-        value={defaultValue}
+        value={filter}
         onChange={handleChange}
         className={classes.select}
         IconComponent={styledArrowDropDownIcon}
@@ -47,6 +48,7 @@ Selectbox.propsTypes = {
   handleChange: PropsTypes.func.isRequired,
   label: PropsTypes.string.isRequired,
   defaultValue: PropsTypes.string.isRequired,
+  filter: PropsTypes.string.isRequired,
 };
 
 export default React.memo(Selectbox);
