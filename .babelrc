@@ -7,7 +7,6 @@
         "loose": true
       }
     ],
-    ["react-hot-loader/babel"],
     [
       "babel-plugin-import",
       {

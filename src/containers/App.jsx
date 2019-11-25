@@ -7,8 +7,8 @@ import {
 import * as actions from '../actions';
 import { pluralize, getScrollHeight, pTHotels } from '../lib';
 import { filteredHotelsSelector } from '../selectors';
-import HotelCardList from './HotelCardList';
-import Selectbox from './Select';
+import HotelCardList from '../components/HotelCardList';
+import Selectbox from '../components/Select';
 
 const App = ({
   hotels, filters, filter, isLoading, getHotelsRequest, setFilter,
