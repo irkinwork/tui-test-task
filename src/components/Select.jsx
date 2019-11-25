@@ -1,42 +1,52 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import PropsTypes from 'prop-types';
+import { MenuItem, Select, Box } from '@material-ui/core/';
+import { makeStyles, styled } from '@material-ui/core/styles';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+const useStyles = makeStyles(() => ({
+  select: {
+    color: 'white',
+    '&:before': {
+      borderColor: 'white',
+    },
+    '&:after': {
+      borderColor: 'white',
+    },
   },
 }));
 
 const Selectbox = ({
   items, handleChange, label, defaultValue,
 }) => {
+  const styledArrowDropDownIcon = styled(ArrowDropDownIcon)({
+    color: 'white',
+  });
   const classes = useStyles();
   return (
-    <div>
-      <FormControl className={classes.formControl}>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={defaultValue}
-          onChange={handleChange}
-        >
-          <MenuItem key={defaultValue} value={defaultValue}>
-            {label}
-          </MenuItem>
-          {items.map(item => (
-            <MenuItem key={item} value={item}>{item}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <Box mr={2}>
+      <Select
+        value={defaultValue}
+        onChange={handleChange}
+        className={classes.select}
+        IconComponent={styledArrowDropDownIcon}
+      >
+        <MenuItem key={defaultValue} value={defaultValue}>
+          {label}
+        </MenuItem>
+        {items.map(item => (
+          <MenuItem key={item} value={item}>{item}</MenuItem>
+        ))}
+      </Select>
+    </Box>
   );
 };
 
-export default Selectbox;
+Selectbox.propsTypes = {
+  items: PropsTypes.arrayOf(PropsTypes.string).isRequired,
+  handleChange: PropsTypes.func.isRequired,
+  label: PropsTypes.string.isRequired,
+  defaultValue: PropsTypes.string.isRequired,
+};
+
+export default React.memo(Selectbox);

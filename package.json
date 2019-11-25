@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server && webpack --watch",
     "lint": "npx eslint . --ext js,jsx",
-    "lintfix": "npx eslint . --fix --ext js,jsx"
+    "lintfix": "npx eslint . --fix --ext js,jsx",
+    "build": "npx webpack -p --env production"
   },
   "author": "Irina Nikolaidi",
   "dependencies": {
@@ -35,6 +36,7 @@
     "eslint-plugin-jest": "^22.17.0",
     "faker": "^4.1.0",
     "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",

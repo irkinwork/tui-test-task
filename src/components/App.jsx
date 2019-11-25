@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import PropsTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  CircularProgress, Container, Box,
+  CircularProgress, Container, Box, Typography, Toolbar, AppBar,
 } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import * as actions from '../actions';
-import { pluralize, getScrollHeight } from '../lib';
+import { pluralize, getScrollHeight, pTHotels } from '../lib';
 import { filteredHotelsSelector } from '../selectors';
 import HotelCardList from './HotelCardList';
 import Selectbox from './Select';
@@ -55,10 +55,15 @@ const App = ({
 
   return (
     <Container fixed>
-      <div style={{ position: 'fixed', top: '10px', background: '#FFF' }}>
-        <Typography>{`We found: ${pluralize(loadedRowsCount, 'hotel')}`}</Typography>
-      </div>
-      <div style={{ margin: '40px 0 0 0' }}><Selectbox handleChange={handleChange} items={filters} label="Select region" defaultValue="none" /></div>
+      <AppBar>
+        <Container fixed>
+          <Box display="flex" alignItems="flex-end" py={2}>
+            <Selectbox handleChange={handleChange} items={filters} label="Select region" defaultValue="none" />
+            <Typography>{`We found: ${pluralize(loadedRowsCount, 'hotel')}`}</Typography>
+          </Box>
+        </Container>
+      </AppBar>
+      <Toolbar />
       <HotelCardList items={hotels} />
       {renderSpinner()}
     </Container>
@@ -74,6 +79,19 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getHotelsRequest: actions.getHotelsRequest,
   setFilter: actions.setFilter,
+};
+
+App.defaultProps = {
+  filter: 'none',
+};
+
+App.propTypes = {
+  hotels: pTHotels.isRequired,
+  filters: PropsTypes.arrayOf(PropsTypes.string).isRequired,
+  filter: PropsTypes.string,
+  isLoading: PropsTypes.bool.isRequired,
+  getHotelsRequest: PropsTypes.func.isRequired,
+  setFilter: PropsTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

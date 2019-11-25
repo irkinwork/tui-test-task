@@ -1,14 +1,16 @@
 import faker from 'faker';
+import { uniqueId } from 'lodash';
+import PropsTypes from 'prop-types';
 
 const itemsCount = 10000;
 const hotelsList = Array(itemsCount)
   .fill({})
-  .map((item, index) => ({
-    id: index + 1,
+  .map(() => ({
+    id: uniqueId(),
     name: `${faker.name.lastName()} Hotel`,
     region: faker.address.country(),
     price: faker.finance.amount(),
-    image: `https://photo.hotellook.com/image_v2/limit/h${index + 1}_1/345/140.auto`,
+    image: `https://photo.hotellook.com/image_v2/limit/h${uniqueId()}_1/345/170.auto`,
   }));
 
 export const handleFilter = filter => item => (filter === 'none' ? true : item.region === filter);
@@ -37,3 +39,11 @@ export const getScrollHeight = () => Math.max(
   document.body.offsetHeight, document.documentElement.offsetHeight,
   document.body.clientHeight, document.documentElement.clientHeight,
 );
+
+export const pTHotels = PropsTypes.arrayOf(PropsTypes.shape({
+  id: PropsTypes.number,
+  name: PropsTypes.string,
+  region: PropsTypes.string,
+  price: PropsTypes.number,
+  image: PropsTypes.string,
+}));
